@@ -1,0 +1,20 @@
+[user]
+	name = Max
+	email = naturale@hufs.ac.kr
+[init]
+  defaultBranch = main
+[core]
+  editor = vim
+[gitignore]
+  excluesfile = ~/.gitignore_global
+[alias]
+  st = status
+  co = checkout
+  cm = commit
+  br = branch
+  cleanbranch = "!git branch -d $(git branch --merged | grep -v '^\\*\\|\\<master$')"
+  a = "!git add $(git status -s | fzf -m | awk '{print $2}')"
+  b0 = "!git branch --show-current"
+  sync = "!f() { git fetch $1 && git reset --hard $1/$(git b0); }; f"
+
+
