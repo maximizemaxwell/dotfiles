@@ -14,8 +14,7 @@ local servers = {
   "eslint",
   "luau-lsp",
   "clangd",
-  "docker-compose-language-service",
-  "dockerfile-language-server",
+  "texlab",
 }
 
 local nvlsp = require "nvchad.configs.lspconfig"
@@ -42,6 +41,17 @@ lspconfig.solidity.setup {
   single_file_support = true,
 }
 
+lspconfig.docker_compose_languageserver.setup {
+  cmd = { "docker-compose-language-server", "--stdio" },
+  filetypes = { "yaml.docker-compose" },
+  root_dir = lspconfig.util.root_pattern "docker-compose.yml",
+}
+
+lspconfig.dockerls.setup {
+  cmd = { "docker-langserver", "--stdio" },
+  filetypes = { "Dockerfile", "dockerfile" },
+  root_dir = lspconfig.util.root_pattern "Dockerfile",
+}
 -- configuring single server, example: typescript
 -- lspconfig.ts_ls.setup {
 --   on_attach = nvlsp.on_attach,
