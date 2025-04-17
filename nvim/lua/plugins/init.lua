@@ -65,19 +65,7 @@ return {
       require("gobaek").setup()
     end,
   },
-  {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim", -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
 
-      -- Only one of these is needed.
-      "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua", -- optional
-      "echasnovski/mini.pick", -- optional
-    },
-    config = true,
-  },
   -- Enable Copilot
   {
     "github/copilot.vim",
@@ -86,5 +74,55 @@ return {
       vim.g.copilot_no_tab_map = true
       vim.g.copilot_assume_mapped = true
     end,
-  }, -- optional, UI for :JupyniumKernelSelect
+  },
+  {
+    "kiyoon/Korean-IME.nvim",
+    keys = {
+      -- lazy load on 한영전환
+      {
+        "<f12>",
+        function()
+          require("korean_ime").change_mode()
+        end,
+        mode = { "i", "n", "x", "s" },
+        desc = "한/영",
+      },
+    },
+    config = function()
+      require("korean_ime").setup()
+
+      vim.keymap.set("i", "<f9>", function()
+        require("korean_ime").convert_hanja()
+      end, { noremap = true, silent = true, desc = "한자" })
+    end,
+  },
+  {
+    "jay-babu/mason-nvim-dap.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "mfussenegger/nvim-dap",
+    },
+    config = function()
+      require("mason-nvim-dap").setup {
+        ensure_installed = { "codelldb", "delve" },
+        handlers = {
+          function(config)
+            require("mason-nvim-dap").default_setup(config)
+          end,
+          python = function(config)
+            config.adapters = {
+              type = "executable",
+              command = "/usr/bin/python3",
+              args = {
+                "-m",
+                "debugpy.adapter",
+              },
+            }
+            require("mason-nvim-dap").default_setup(config) -- don't forget this!
+          end,
+        },
+      }
+    end,
+  },
+  -- optional, UI for :JupyniumKernelSelec
 }
