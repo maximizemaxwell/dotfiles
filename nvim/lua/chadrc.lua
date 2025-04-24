@@ -6,7 +6,7 @@
 local M = {}
 
 M.base46 = {
-  theme = "chadracula-evondev",
+  theme = "carbonfox",
   hl_override = {
     Normal = { bg = "NONE" }, -- Normal 배경을 투명하게
     NonText = { bg = "NONE" }, -- NonText 영역도 투명하게
