@@ -4,9 +4,10 @@ local options = {
     css = { "prettier" },
     html = { "prettier" },
     yaml = { "prettier" },
-    python = { "isort", "black" },
+    python = { "ruff" },
     cpp = { "clang-format" },
     go = { "gci" },
+    json = { "prettier" },
   },
 
   format_on_save = {
