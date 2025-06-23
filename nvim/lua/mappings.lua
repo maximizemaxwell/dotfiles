@@ -13,3 +13,9 @@ map("i", "jk", "<ESC>")
 map("i", "<C-l>", function()
   vim.fn.feedkeys(vim.fn["copilot#Accept"](), "")
 end, { desc = "Copilot Accept", noremap = true, silent = true })
+
+map("v", "<C-q>", [[:s/^\s*\(\/\/\|#\|--\)\s\?//<CR>:noh<CR>]], {
+  desc = "Uncomment //, #, or --",
+  noremap = true,
+  silent = true,
+})
