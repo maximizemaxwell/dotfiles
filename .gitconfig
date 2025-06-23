@@ -18,3 +18,11 @@
   sync = "!f() { git fetch $1 && git reset --hard $1/$(git b0); }; f"
 
 
+[sendemail]
+	smtpServer = smtp.gmail.com
+	smtpServerPort = 587
+	smtpEncryption = tls
+	smtpAuthMethod = LOGIN
+	smtpUser = ewhk9887@gmail.com
+	smtpPass = qgqncokllsvxyyac
+	from = Eunsoo Eun <ewhk9887@gmail.com>
