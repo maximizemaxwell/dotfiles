@@ -14,8 +14,29 @@ map("i", "<C-l>", function()
   vim.fn.feedkeys(vim.fn["copilot#Accept"](), "")
 end, { desc = "Copilot Accept", noremap = true, silent = true })
 
-map("v", "<C-q>", [[:s/^\s*\(\/\/\|#\|--\)\s\?//<CR>:noh<CR>]], {
-  desc = "Uncomment //, #, or --",
+map("v", "<C-q>", [[:s/^\(\s*\)\(\/\/\|#\|--\)\s\?/\1/<CR>:noh<CR>]], {
+  desc = "Uncomment //, #, or -- (preserve indent)",
+  noremap = true,
+  silent = true,
+})
+
+-- 줄 앞에 '//' 추가
+vim.keymap.set("v", "<C-/>", [[:s/^\(\s*\)/\1\/\/ /<CR>:noh<CR>]], {
+  desc = "Add // comment",
+  noremap = true,
+  silent = true,
+})
+
+-- 줄 앞에 '#' 추가
+vim.keymap.set("v", "<C-#>", [[:s/^\(\s*\)/\1# /<CR>:noh<CR>]], {
+  desc = "Add # comment",
+  noremap = true,
+  silent = true,
+})
+
+-- 줄 앞에 '--' 추가
+vim.keymap.set("v", "<C-->", [[:s/^\(\s*\)/\1-- /<CR>:noh<CR>]], {
+  desc = "Add -- comment",
   noremap = true,
   silent = true,
 })
